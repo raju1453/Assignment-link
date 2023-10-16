@@ -1,0 +1,120 @@
+HTML:
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Survey Form</title>
+    <style>
+        /* Add your CSS styles here */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border: 2px solid #333;
+            z-index: 999;
+        }
+    </style>
+</head>
+<body>
+    <h1>Survey Form</h1>
+    <form id="surveyForm">
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" required><br><br>
+        
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" required><br><br>
+        
+        <label for="dob">Date of Birth:</label>
+        <input type="date" id="dob" required><br><br>
+        
+        <label for="country">Country:</label>
+        <select id="country" required>
+            <option value="">Select Country</option>
+            <option value="USA">USA</option>
+            <option value="Canada">Canada</option>
+            <!-- Add more country options here -->
+        </select><br><br>
+        
+        <label>Gender:</label>
+        <input type="checkbox" id="male" name="gender" value="Male"> Male
+        <input type="checkbox" id="female" name="gender" value="Female"> Female
+        <input type="checkbox" id="other" name="gender" value="Other"> Other<br><br>
+        
+        <label for="profession">Profession:</label>
+        <input type="text" id="profession" required><br><br>
+        
+        <label for="email">Email:</label>
+        <input type="email" id="email" required><br><br>
+        
+        <label for="mobileNumber">Mobile Number:</label>
+        <input type="tel" id="mobileNumber" required><br><br>
+        
+        <button type="button" onclick="submitForm()">Submit</button>
+        <button type="button" onclick="resetForm()">Reset</button>
+    </form>
+    
+    <div id="popup" class="popup">
+        <h2>Survey Results</h2>
+        <p><strong>First Name:</strong> <span id="resultFirstName"></span></p>
+        <p><strong>Last Name:</strong> <span id="resultLastName"></span></p>
+        <p><strong>Date of Birth:</strong> <span id="resultDOB"></span></p>
+        <p><strong>Country:</strong> <span id="resultCountry"></span></p>
+        <p><strong>Gender:</strong> <span id="resultGender"></span></p>
+        <p><strong>Profession:</strong> <span id="resultProfession"></span></p>
+        <p><strong>Email:</strong> <span id="resultEmail"></span></p>
+        <p><strong>Mobile Number:</strong> <span id="resultMobileNumber"></span></p>
+        <button type="button" onclick="closePopup()">Close</button>
+    </div>
+
+    <script>
+        function submitForm() {
+            // Retrieve form values
+            const firstName = document.getElementById("firstName").value;
+            const lastName = document.getElementById("lastName").value;
+            const dob = document.getElementById("dob").value;
+            const country = document.getElementById("country").value;
+            
+            const genderElements = document.getElementsByName("gender");
+            let gender = "";
+            for (const element of genderElements) {
+                if (element.checked) {
+                    gender += element.value + " ";
+                }
+            }
+            
+            const profession = document.getElementById("profession").value;
+            const email = document.getElementById("email").value;
+            const mobileNumber = document.getElementById("mobileNumber").value;
+            
+            // Display values in the popup
+            document.getElementById("resultFirstName").textContent = firstName;
+            document.getElementById("resultLastName").textContent = lastName;
+            document.getElementById("resultDOB").textContent = dob;
+            document.getElementById("resultCountry").textContent = country;
+            document.getElementById("resultGender").textContent = gender;
+            document.getElementById("resultProfession").textContent = profession;
+            document.getElementById("resultEmail").textContent = email;
+            document.getElementById("resultMobileNumber").textContent = mobileNumber;
+            
+            // Show the popup
+            document.getElementById("popup").style.display = "block";
+        }
+        
+        function closePopup() {
+            // Close the popup and reset the form
+            document.getElementById("popup").style.display = "none";
+            document.getElementById("surveyForm").reset();
+        }
+        
+        function resetForm() {
+            // Reset the form
+            document.getElementById("surveyForm").reset();
+        }
+    </script>
+</body>
+</html>
